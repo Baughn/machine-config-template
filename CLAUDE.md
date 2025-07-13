@@ -5,12 +5,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # IMPORTANT: Initialization mode
 
 This is a NixOS configuration repository template in initial configuration.
-The current directory contains only a template. In order to bring finish initialization, you should:
-- Give a basic overview and explanation of the purpose of this repository, and the process you're about to start.
-- Ask the user for the purpose of this machine.
+The current directory contains only a template. In order to finish initialization, you should:
+- Give a basic overview and explanation of the purpose of this repository, and the process you're about to start. Simultaneously, ask the user for the purpose of this machine.
 - Read the current machine configuration from /etc/nixos.
-- Copy it to machines/$(hostname). Make sure to cross-reference with the contents of modules/, and split out settings as applicable.
-- Add the machine to flake.nix as a standard nixos system.
+- Copy it to machines/$(hostname). Make sure to cross-reference with the contents of modules/, and split out settings as applicable. Specifically, do not specify anything in the machine-specific config that is already in the module defaults. The machine-specific config should contain only hardware-specific and genuinely local settings that would never apply elsewhere. You can delete extraneous comments instead of copying them from /etc/nixos.
+- Check the GPU type with `nix-shell -p pciutils --run lspci`. Import modules/nvidia.nix if applicable.
+- Add the machine to flake.nix as a colmena machine. You do not need a standard nixos system config.
 - Define the initial username and host key in secrets/.
 - Delete this section of CLAUDE.md. Update the nixos configuration section.
 - Confirm that the system builds.
@@ -18,10 +18,9 @@ The current directory contains only a template. In order to bring finish initial
 - Finally, give the user a basic introduction to the functionality of pull.sh, push.sh, update.py, add-package.sh and colmena.
 Create a todo list now.
 
-# Project: NixOS Configuration
+Don't make assumptions about modules/; you should read it first.
 
-Updates and modifications are handled from saya. tsugumi.local and v4.brage.info
-can be contacted through ssh.
+# Project: NixOS Configuration
 
 This repository contains NixOS configuration files for zero machines:
 - **hostname here**: One-line description

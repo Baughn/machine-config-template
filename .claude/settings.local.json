@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./tools-for-claude/search-options.sh:*)",
+      "Bash(nix flake check:*)",
+      "Bash(./tools-for-claude/format-nix.sh:*)",
+      "Bash(jj status:*)",
+      "Bash(rg:*)",
+      "Bash(jj diff:*)",
+      "Bash(./tools-for-claude/lint.sh:*)",
+      "Bash(jj log:*)",
+      "Bash(grep:*)",
+      "Bash(colmena build:*)",
+      "Bash(ls:*)",
+      "Bash(hostname)"
+    ],
+    "deny": []
+  }
+}
