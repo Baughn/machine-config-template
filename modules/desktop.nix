@@ -1,3 +1,5 @@
+# Desktop environment configuration for machines with graphical interfaces
+# Enables audio, gaming support, and installs GUI applications
 { config, lib, pkgs, ... }:
 
 {

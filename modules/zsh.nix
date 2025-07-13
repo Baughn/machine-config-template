@@ -1,3 +1,5 @@
+# Zsh shell configuration with custom theme
+# Provides Oh-My-Zsh setup with custom sunaku theme supporting both git and jujutsu
 { config, lib, pkgs, ... }:
 
 let

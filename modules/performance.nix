@@ -1,3 +1,5 @@
+# High-performance optimizations for gaming systems
+# Configures kernel parameters, memory management, I/O schedulers, and gaming utilities
 { config, lib, pkgs, ... }:
 
 {

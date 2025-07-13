@@ -1,3 +1,5 @@
+# Base configuration applied to every machine in the fleet
+# Provides essential system settings, nix configuration, and universally needed CLI tools
 { pkgs, ... }:
 
 {

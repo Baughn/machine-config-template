@@ -1,3 +1,5 @@
+# Network configuration for local and remote connectivity
+# Configures TCP optimization, firewall, mDNS discovery, and SSH access
 { config, lib, pkgs, ... }:
 
 {
