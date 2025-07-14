@@ -14,7 +14,7 @@ A modular NixOS configuration template using Flakes and Colmena for multi-machin
 ## Quick Start
 
 1. Clone this template
-2. Run `claude init` to start the guided setup process
+2. Run `./init.sh` to start the guided setup process
    - Claude Code will help you:
      - Import existing `/etc/nixos` configuration
      - Set up the machine as `machines/$(hostname)`
