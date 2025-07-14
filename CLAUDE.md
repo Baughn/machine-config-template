@@ -11,7 +11,7 @@ The current directory contains only a template. In order to finish initializatio
 - Copy it to machines/$(hostname). Make sure to cross-reference with the contents of modules/, and split out settings as applicable. Specifically, do not specify anything in the machine-specific config that is already in the module defaults. The machine-specific config should contain only hardware-specific and genuinely local settings that would never apply elsewhere. You can delete extraneous comments instead of copying them from /etc/nixos.
 - Check the GPU type with `nix-shell -p pciutils --run lspci`. Import modules/nvidia.nix if applicable.
 - Add the machine to flake.nix as a colmena machine. You do not need a standard nixos system config.
-- Define the initial username and host key in secrets/.
+- Define the initial username and host key in secrets/. Note: init.sh has already generated an SSH key if needed. Read the user's SSH public key from ~/.ssh/id_ed25519.pub and add it to the username array in secrets/secrets.nix. The key has already been added to ~/.ssh/authorized_keys.
 - Delete this section of CLAUDE.md. Update the nixos configuration section.
 - Confirm that the system builds.
 - Commit with jj.
