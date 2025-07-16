@@ -14,5 +14,6 @@
   "ripgrep",
   "rustup",
   "sshfs",
+  "uv",
   "wget"
 ]
