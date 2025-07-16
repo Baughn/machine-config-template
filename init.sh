@@ -18,4 +18,4 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
 fi
 
 npx @anthropic-ai/claude-code migrate-installer
-~/.claude/local/claude init
+~/.claude/local/claude --model opus init
