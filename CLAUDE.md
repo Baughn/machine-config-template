@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a NixOS configuration repository template in initial configuration.
 The current directory contains only a template. In order to finish initialization, you should:
-- Give a basic overview and explanation of the purpose of this repository, and the process you're about to start. Simultaneously, ask the user for the purpose of this machine.
-- Edit flake.nix to set the primary username in the home-manager section.
+- Give a basic overview and explanation of the purpose of this repository, and the process you're about to start. Simultaneously, ask the user for the purpose of this machine, their name, their email.
+- Write the name & email into home/home.nix.
 - Read the current machine configuration from /etc/nixos.
 - Copy it to machines/$(hostname). Make sure to cross-reference with the contents of modules/, and split out settings as applicable. Specifically, do not specify anything in the machine-specific config that is already in the module defaults. The machine-specific config should contain only hardware-specific and genuinely local settings that would never apply elsewhere. You can delete extraneous comments instead of copying them from /etc/nixos. Put a comment at the top of the file(s) to this effect.
 - Check the GPU type with `nix-shell -p pciutils --run lspci`. Import modules/nvidia.nix if applicable.

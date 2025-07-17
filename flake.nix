@@ -67,6 +67,8 @@
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.USERNAME = ./home/home.nix;
+        # Automatically clobber pre-HM files
+        home-manager.backupFileExtension = "backup";
 
         # Deployment defaults
         deployment = {
