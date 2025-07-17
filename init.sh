@@ -5,6 +5,24 @@ set -euo pipefail
 
 cd "$(dirname "$(readlink -f "$0")")"
 
+# Get current username
+CURRENT_USER=$(whoami)
+
+# Handle username replacement in flake.nix
+if [ "$CURRENT_USER" = "nixos" ]; then
+    echo -n "Enter your preferred username: "
+    read PREFERRED_USER
+    if [ -z "$PREFERRED_USER" ]; then
+        echo "Username cannot be empty. Exiting."
+        exit 1
+    fi
+    echo "Replacing USERNAME placeholder with '$PREFERRED_USER' in flake.nix..."
+    sed -i "s/USERNAME/$PREFERRED_USER/g" flake.nix
+else
+    echo "Replacing USERNAME placeholder with '$CURRENT_USER' in flake.nix..."
+    sed -i "s/USERNAME/$CURRENT_USER/g" flake.nix
+fi
+
 # Generate SSH key if it doesn't exist
 if [ ! -f ~/.ssh/id_ed25519 ]; then
     echo "Generating SSH key..."

@@ -13,9 +13,12 @@
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-kernel, nix-index-database, colmena, agenix, ... }: {
+  outputs = { self, nixpkgs, nixpkgs-kernel, nix-index-database, colmena, agenix, home-manager, ... }: {
     packages.x86_64-linux.options = (import (nixpkgs.outPath + "/nixos/release.nix") { }).options;
 
     # Colmena deployment configuration
@@ -38,31 +41,50 @@
         };
       };
 
+      defaults = { pkgs, ... }: {
+        imports = [
+          nix-index-database.nixosModules.nix-index
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager
+          ./secrets
+        ];
+
+        # Setup nix-index
+        programs.nix-index-database.comma.enable = true;
+
+        # Propagate nixpkgs
+        nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
+        environment.etc."nixpkgs".source = nixpkgs;
+        nix.registry.nixpkgs.flake = nixpkgs;
+
+        # Load packages necessary to build this config
+        environment.systemPackages = [
+          colmena.packages.x86_64-linux.colmena
+          agenix.packages.x86_64-linux.agenix
+        ];
+
+        # Bare-minimum home-manager setup
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.users.USERNAME = ./home/home.nix;
+
+        # Deployment defaults
+        deployment = {
+          targetUser = "root";
+          buildOnTarget = false;
+          replaceUnknownProfiles = true;
+        };
+      };
+
       # Add machines like this:
       # $(hostname) = { name, nodes, ... }: {
       #  imports = [
       #    ./machines/saya/configuration.nix
-      #    nix-index-database.nixosModules.nix-index
-      #    agenix.nixosModules.default
-      #    ./secrets
-      #  ];
-      #  # Setup nix-index
-      #  programs.nix-index-database.comma.enable = true;
-      #  # Propagate nixpkgs
-      #  nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
-      #  environment.etc."nixpkgs".source = nixpkgs;
-      #  nix.registry.nixpkgs.flake = nixpkgs;
-      #  environment.systemPackages = [
-      #    colmena.packages.x86_64-linux.colmena
-      #    agenix.packages.x86_64-linux.agenix
       #  ];
       #  # Deployment configuration
       #  deployment = {
-      #    targetHost = "$(hostname)";  # E.g. maki.local
-      #    targetUser = "root";
-      #    buildOnTarget = false; # Build locally
-      #    allowLocalDeployment = true;
-      #    replaceUnknownProfiles = true;
+      #    targetHost = "$(hostname)";   # E.g. maki.local
+      #    allowLocalDeployment = true;  # Only for the primary (control) machine
       #  };
       #};
     };
