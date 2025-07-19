@@ -6,6 +6,7 @@
   imports = [
     ./zsh.nix
     ./networking.nix
+    ./performance-default.nix
   ];
 
   # Use RAM for /tmp, but like, efficiently.

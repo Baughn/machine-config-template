@@ -4,7 +4,7 @@
 
 {
   imports = [
-    ./performance.nix
+    ./performance-desktop.nix
   ];
 
   # Allow things that need real-time (like sound) to get real-time.

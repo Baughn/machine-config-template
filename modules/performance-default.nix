@@ -1,23 +1,6 @@
-# High-performance optimizations for gaming systems
-# Configures kernel parameters, memory management, I/O schedulers, and gaming utilities
-{ config, lib, pkgs, ... }:
-
+# Basic performance optimizations for 'all' systems
 {
-  # AIDEV-NOTE: Performance optimizations for AMD 7950X3D + RTX 4090 gaming system
-
-  # Use zen kernel for better gaming performance
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
-
-    # CPU optimizations for 7950X3D
-    kernelParams = [
-      "preempt=full" # Minimize latency
-      "threadirqs"
-      "amd_pstate=active" # Use CPPC-based driver for faster response
-      "amd_prefcore=1" # Prefer V-Cache CCD for latency-sensitive threads
-      "mitigations=off"
-    ];
-
     # VM tweaks for better responsiveness
     kernel.sysctl = {
       "vm.swappiness" = 10; # Prefer zram, avoid SSD wear
@@ -34,7 +17,7 @@
     priority = 100;
   };
 
-  # Kill applications on OOM... prior to the desktop locking up.
+  # Kill applications on OOM... prior to the system locking up.
   services.earlyoom = {
     enable = true;
     enableNotifications = true;
@@ -65,10 +48,4 @@
     ACTION=="add|change", KERNEL=="sd*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="bfq"
     ACTION=="add|change", KERNEL=="sd*", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
   '';
-
-  # GameMode for per-game performance governor switching
-  programs.gamemode.enable = true;
-
-  # System76 scheduler for better desktop responsiveness
-  services.system76-scheduler.enable = true;
 }
