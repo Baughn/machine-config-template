@@ -8,6 +8,7 @@
       "Bash(rg:*)",
       "Bash(jj diff:*)",
       "Bash(./tools-for-claude/lint.sh:*)",
+      "Bash(./tools-for-claude/lspci.sh:*)",
       "Bash(jj log:*)",
       "Bash(grep:*)",
       "Bash(colmena build:*)",
