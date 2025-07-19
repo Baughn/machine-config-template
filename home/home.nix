@@ -16,6 +16,8 @@
     claude = "~/.claude/local/claude";
   };
 
+  programs.zsh.enable = true;
+
   programs.jujutsu = {
     enable = true;
     ediff = true;
