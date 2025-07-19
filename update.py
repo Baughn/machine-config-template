@@ -213,6 +213,12 @@ def remote_garbage_collect(ctx: ExecutionContext) -> bool:
 
 def update_flatpaks(ctx: ExecutionContext) -> bool:
     """Update Flatpak applications."""
+    # Check if flatpak is installed
+    check_flatpak = subprocess.run(['which', 'flatpak'], capture_output=True)
+    if check_flatpak.returncode != 0:
+        print_info("Flatpak not installed, skipping flatpak updates")
+        return True
+    
     print_info("Updating Flatpak applications...")
     return run_command(['sudo', 'flatpak', 'update', '-y'])
 
