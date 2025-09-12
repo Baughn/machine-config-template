@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-kernel.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -18,7 +20,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-kernel, nix-index-database, colmena, agenix, home-manager, ... }: {
+  outputs = { self, determinate, nixpkgs, nixpkgs-kernel, nix-index-database, colmena, agenix, home-manager, ... }: {
     packages.x86_64-linux.options = (import (nixpkgs.outPath + "/nixos/release.nix") { }).options;
 
     # Colmena deployment configuration
@@ -43,6 +45,7 @@
 
       defaults = { pkgs, ... }: {
         imports = [
+          determinate.nixosModules.default
           nix-index-database.nixosModules.nix-index
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager

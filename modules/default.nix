@@ -26,6 +26,7 @@
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = [ "nix-command" "flakes" ];
+    eval-cores = 4;
   };
   ## Using nix-index instead, for flake support
   programs = {
@@ -39,12 +40,6 @@
     };
   };
 
-  # Automatic garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 14d";
-  };
   # Enable all terminfo entries system-wide
   environment.enableAllTerminfo = true;
 
