@@ -45,6 +45,8 @@
     dates = "weekly";
     options = "--delete-older-than 14d";
   };
+  # Enable all terminfo entries system-wide
+  environment.enableAllTerminfo = true;
 
   # Shell configuration
   users.defaultUserShell = pkgs.zsh;
