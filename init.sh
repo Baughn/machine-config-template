@@ -36,5 +36,5 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
 fi
 
 npx @anthropic-ai/claude-code \
-	--model opus init --add-dir /etc/nixos \
+	init --add-dir /etc/nixos \
 	--append-system-prompt "For this session your job is to execute the initialisation workflow. You control the conversation; it is your job to ask the user questions, not the other way around."
