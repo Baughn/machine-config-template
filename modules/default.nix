@@ -13,8 +13,8 @@
   # Enable enhanced Neovim configuration
   me.neovim.enable = true;
 
-   # Would prefer zram, but it's broken
-   boot.tmp.cleanOnBoot = true;
+  # Would prefer zram, but it's broken
+  boot.tmp.cleanOnBoot = true;
 
   # Security?
   security.sudo.wheelNeedsPassword = false;
