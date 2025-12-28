@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i python3 --packages python3 nvd nom
+#!nix-shell -i python3 --packages python3 nvd nix-output-monitor
 
 import json
 import os
